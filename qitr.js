@@ -22,7 +22,7 @@ app.get('/enter', function (request, response) {
 
 app.post('/enter', function (request, response) {
   console.log(request.body);
-  var input_data_string = request.body;
+  var input_data_string = request.body.data_string;
   apis.updatePosition(input_data_string, function (error, result) {
     if (error) {
       console.log('Record Failure');

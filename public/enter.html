@@ -9,15 +9,14 @@
 
 <body>
   <p></p>
-  <div class="input-group col-md-8 col-md-offset-2">
-    <input type="text" class="form-control" placeholder="Order String" required>
-    <span class="input-group-btn">
-        <button class="btn btn-default" type="button">Submit</button>
-   </span>
+  <div ng-app="enter_trade_data" ng-controller="post_trade_data">
+    <div class="input-group col-md-10 col-md-offset-1">
+      <input type="text" class="form-control" placeholder="Order String" ng-model="order_string" required/>
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" ng-click="postTradeData()">Submit</button>
+      </span>
+    </div>
   </div>
-  <!--<div ng-app="myApp" ng-controller="myCtrl">
-    <h1>{{myWelcome}}</h1>
-  </div>-->
 
   <script src="public/js/enter.js" type="text/javascript"></script>
 </body>
