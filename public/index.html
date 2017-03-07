@@ -17,11 +17,17 @@
   </div>
 
   <br>
-  
+
   <div ng-app="index_show_all_positions" ng-controller="index_all_positions">
     <div class="container col-md-4 col-md-offset-4">
       <table class="table table-bordered">
-        <tbody>
+        <thead id=table_head>
+          <tr>
+            <th>Instrument</th>
+            <th>Position</th>
+          </tr>
+        </thead>
+        <tbody id="default_tbody">
           <tr ng-repeat="i in positions">
             <td>{{ i.instrument_id }}</td>
             <td>{{ i.position }}</td>
