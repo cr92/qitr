@@ -12,12 +12,26 @@ function updateTrades(data, callback) {}
 function fetchPosition(data, callback) {
   console.log('GET url: ' + data.originalUrl);
   var instrument_id = data.originalUrl.split('/')[2];
-  return callback(null, 'success');
+  var query_string = 'SELECT instrument_id,position FROM position WHERE instrument_id=' + instrument_id;
+  connection.query(query_string, function (error, result) {
+    if (result) {
+      return callback(null, result);
+    } else {
+      return callback(error, null);
+    }
+  });
 }
 
-function fetchAllPosition(data, callback) {
+function fetchAllPositions(data, callback) {
   console.log('GET url: ' + data.originalUrl);
-  return callback(null, 'success all');
+  var query_string = 'SELECT instrument_id,position FROM position';
+  connection.query(query_string, function (error, result) {
+    if (result) {
+      return callback(null, result);
+    } else {
+      return callback(error, null);
+    }
+  });
 }
 
 function parseInput(data, callback) {}
@@ -27,5 +41,5 @@ module.exports = {
   updateTrades: updateTrades,
   fetchPosition: fetchPosition,
   parseInput: parseInput,
-  fetchAllPosition: fetchAllPosition
+  fetchAllPositions: fetchAllPositions
 };

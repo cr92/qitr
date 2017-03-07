@@ -15,7 +15,7 @@ app.get('/', function (request, response) {
 });
 
 app.get('/showAll', function (request, response) {
-  apis.fetchAllPosition(request, function (error, data) {
+  apis.fetchAllPositions(request, function (error, data) {
     response.setHeader('Content-Type', 'application/json');
     response.send(JSON.stringify(data));
   });
