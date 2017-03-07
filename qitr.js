@@ -15,11 +15,17 @@ app.get('/', function (request, response) {
 });
 
 app.get('/showAll', function (request, response) {
-  console.log('hoo-hoo');
+  apis.fetchAllPosition(request, function (error, data) {
+    response.setHeader('Content-Type', 'application/json');
+    response.send(JSON.stringify(data));
+  });
 });
 
 app.get('/instrument/*', function (request, response) {
-  console.log('yoo-hoo');
+  apis.fetchPosition(request, function (error, data) {
+    response.setHeader('Content-Type', 'application/json');
+    response.send(JSON.stringify(data));
+  });
 });
 
 var server = app.listen(9090, function () {
