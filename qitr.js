@@ -12,6 +12,30 @@ app.use(bodyParser.urlencoded({
 
 app.get('/', function (request, response) {
   console.log('boo-hoo');
+  response.sendFile(__dirname + '/public/index.html');
+});
+
+app.get('/enter', function (request, response) {
+  console.log('boo-hoo');
+  response.sendFile(__dirname + '/public/enter.html');
+});
+
+app.post('/enter', function (request, response) {
+  console.log(request.body);
+  var input_data_string = request.body;
+  apis.updatePosition(input_data_string, function (error, result) {
+    if (error) {
+      console.log('Record Failure');
+      console.log(error);
+      response.setHeader('Content-Type', 'application/json');
+      response.send(JSON.stringify(error));
+      throw error;
+    } else {
+      console.log('Record Successful');
+      response.setHeader('Content-Type', 'application/json');
+      response.send(JSON.stringify(result));
+    }
+  });
 });
 
 app.get('/showAll', function (request, response) {

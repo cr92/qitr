@@ -1,11 +1,13 @@
-    var app = angular.module('myApp', []);
-    app.controller('myCtrl', function ($scope, $http) {
-      $http({
-        method: "GET",
-        url: "showAll"
-      }).then(function mySucces(response) {
-        $scope.myWelcome = response.data;
-      }, function myError(response) {
-        $scope.myWelcome = response.statusText;
-      });
-    });
+var app = angular.module('index_show_all_positions', []);
+app.controller('index_all_positions', function ($scope, $http) {
+  $http({
+    method: "GET",
+    url: "showAll"
+  }).then(function Succes(response) {
+    console.log(response);
+    $scope.positions = response.data;
+  }, function Error(response) {
+    console.log(response);
+    $scope.all_data = response.statusText;
+  });
+});
