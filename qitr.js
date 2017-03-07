@@ -22,5 +22,5 @@ app.get('/instrument/*', function (request, response) {
 
 var server = app.listen(9090, function () {
   var port = server.address().port;
-  console.log("listening at port: %s",port)
+  console.log("listening at localhost:%s",port)
 });
