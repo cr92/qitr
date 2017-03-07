@@ -4,8 +4,20 @@
   "description": "",
   "main": "qitr.js",
   "scripts": {
+    "start": "sssss",
+    "setup": "setup",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "MIT",
+  "dependencies": {
+    "angular": "^1.6.2",
+    "angular-route": "^1.6.2",
+    "body-parser": "^1.17.0",
+    "bootstrap": "^3.3.7",
+    "express": "^4.15.1",
+    "jquery": "^3.1.1",
+    "mysql": "^2.13.0",
+    "request": "^2.80.0"
+  }
 }
