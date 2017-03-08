@@ -29,6 +29,9 @@ app.post('/enter', function (request, response) {
       console.log(error);
       response.setHeader('Content-Type', 'application/json');
       response.send(JSON.stringify(error));
+      // response.status(500).send({
+      //   message: 'Server Error'
+      // });
     } else {
       console.log('Record Successful');
       response.setHeader('Content-Type', 'application/json');
