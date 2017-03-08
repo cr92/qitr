@@ -35,7 +35,6 @@ app_x.controller('index_show_submit', function ($scope, $http) {
       $scope.all_data = response.statusText;
     });
   };
-
 });
 
 angular.bootstrap(document.getElementById("show_all"), ['index_show_all_positions']);
