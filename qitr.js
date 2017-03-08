@@ -30,7 +30,7 @@ app.post('/enter', function (request, response) {
       response.setHeader('Content-Type', 'application/json');
       response.send(JSON.stringify(error));
       // response.status(500).send({
-      //   message: 'Server Error'
+      //   message: '500 - Server Error'
       // });
     } else {
       console.log('Record Successful');
@@ -47,7 +47,7 @@ app.get('/showAll', function (request, response) {
       response.send(JSON.stringify(data));
     } else {
       response.status(404).send({
-        message: 'No records found'
+        message: '404 - Not Found'
       });
     }
   });
@@ -60,7 +60,7 @@ app.get('/instrument/*', function (request, response) {
       response.send(JSON.stringify(data));
     } else {
       response.status(404).send({
-        message: 'Instrument Not Found'
+        message: '404 - Not Found'
       });
     }
   });
