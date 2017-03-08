@@ -4,11 +4,9 @@
   "description": "",
   "main": "qitr.js",
   "scripts": {
-    "start": "sssss",
-    "setup": "setup",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node qitr.js"
   },
-  "author": "",
+  "author": "AR",
   "license": "MIT",
   "dependencies": {
     "angular": "^1.6.2",
