@@ -8,32 +8,48 @@
 <script src="node_modules/angular/angular.min.js"></script>
 
 <body>
-  <p></p>
+
+  <br>
+  
   <div class="input-group col-md-4 col-md-offset-4">
     <input type="text" class="form-control" placeholder="Instrument Id" required>
     <span class="input-group-btn">
-        <button class="btn btn-default" type="button">Find</button>
+        <button class="btn btn-success" type="button">Find</button>
    </span>
   </div>
 
   <br>
 
-  <div ng-app="index_show_all_positions" ng-controller="index_all_positions">
+  <div ng-app="index_show_search" ng-controller="index_show_submit">
     <div class="container col-md-4 col-md-offset-4">
-      <table class="table table-bordered">
-        <thead id=table_head>
-          <tr>
-            <th>Instrument</th>
-            <th>Position</th>
-          </tr>
-        </thead>
-        <tbody id="default_tbody">
-          <tr ng-repeat="i in positions">
-            <td>{{ i.instrument_id }}</td>
-            <td>{{ i.position }}</td>
-          </tr>
-        </tbody>
-      </table>
+      <div class="panel panel-danger">
+        <div class="panel-heading">Search Result</div>
+        <div class="panel-body">Instrument: {{custom_data.instrument_id}}</div>
+        <div class="panel-body">Position: {{custom_data.position}}</div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div ng-app="index_show_all_positions" ng-controller="index_all_positions" id="show_all">
+    <div class="container col-md-4 col-md-offset-4">
+      <div class="panel panel-default">
+        <table class="table table-striped table-bordered">
+          <thead>
+            <tr>
+              <th>Instrument</th>
+              <th>Position</th>
+            </tr>
+          </thead>
+          <tbody id="default_tbody">
+            <tr ng-repeat="i in positions">
+              <td>{{ i.instrument_id }}</td>
+              <td>{{ i.position }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 
