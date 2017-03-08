@@ -10,17 +10,15 @@
 <body>
 
   <br>
-  
-  <div class="input-group col-md-4 col-md-offset-4">
-    <input type="text" class="form-control" placeholder="Instrument Id" required>
-    <span class="input-group-btn">
-        <button class="btn btn-success" type="button">Find</button>
-   </span>
-  </div>
-
-  <br>
 
   <div ng-app="index_show_search" ng-controller="index_show_submit">
+    <div class="input-group col-md-4 col-md-offset-4">
+      <input type="text" class="form-control" placeholder="Instrument Id" ng-model="input_instrument_id" required>
+      <span class="input-group-btn">
+        <button class="btn btn-success" type="button" ng-click="findPosition()">Find</button>
+      </span>
+    </div>
+    <br>
     <div class="container col-md-4 col-md-offset-4">
       <div class="panel panel-danger">
         <div class="panel-heading">Search Result</div>
