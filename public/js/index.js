@@ -30,6 +30,8 @@ app_x.controller('index_show_submit', function ($scope, $http) {
       $scope.custom_data = response.data[0];
     }, function Error(response) {
       console.log(response);
+      $scope.custom_data.instrument_id = 'Not Available';
+      $scope.custom_data.position = 'Not Available';
       $scope.all_data = response.statusText;
     });
   };

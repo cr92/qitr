@@ -11,12 +11,10 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.get('/', function (request, response) {
-  console.log('boo-hoo');
   response.sendFile(__dirname + '/public/index.html');
 });
 
 app.get('/enter', function (request, response) {
-  console.log('boo-hoo');
   response.sendFile(__dirname + '/public/enter.html');
 });
 
