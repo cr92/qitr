@@ -39,15 +39,27 @@ app.post('/enter', function (request, response) {
 
 app.get('/showAll', function (request, response) {
   apis.fetchAllPositions(request, function (error, data) {
-    response.setHeader('Content-Type', 'application/json');
-    response.send(JSON.stringify(data));
+    if (data) {
+      response.setHeader('Content-Type', 'application/json');
+      response.send(JSON.stringify(data));
+    } else {
+      response.status(404).send({
+        message: 'No records found'
+      });
+    }
   });
 });
 
 app.get('/instrument/*', function (request, response) {
   apis.fetchPosition(request, function (error, data) {
-    response.setHeader('Content-Type', 'application/json');
-    response.send(JSON.stringify(data));
+    if (data) {
+      response.setHeader('Content-Type', 'application/json');
+      response.send(JSON.stringify(data));
+    } else {
+      response.status(404).send({
+        message: 'Instrument Not Found'
+      });
+    }
   });
 });
 
