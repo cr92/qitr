@@ -112,7 +112,7 @@ function fetchPosition(request_data, callback) {
   var instrument_id = request_data.originalUrl.split('/')[2];
   var query_string = 'SELECT instrument_id,position FROM position WHERE instrument_id=' + instrument_id;
   connection.query(query_string, function (error, result) {
-    if (result) {
+    if (result && result.length === 1) {
       return callback(null, result);
     } else {
       return callback(error, null);
