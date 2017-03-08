@@ -14,9 +14,11 @@ app.controller('post_trade_data', function ($scope, $http) {
         }).then(function Succes(response) {
             console.log(response);
             $scope.order_string = '';
+            $scope.isSuccess = true;
             $scope.positions = response.data;
         }, function Error(response) {
             console.log(response);
+            $scope.isSuccess = false;
             $scope.all_data = response.statusText;
         });
     };
