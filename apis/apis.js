@@ -17,6 +17,7 @@ connection.connect();
 
 
 
+// Busiest of the lot...
 function updatePosition(data, callback) {
   var query_string = '';
   var processed_data = parseInput(data);
@@ -24,17 +25,19 @@ function updatePosition(data, callback) {
     instrument_id: processed_data.instrument_id,
     position: 0
   };
-
+  // First updates trades table
   updateTrades(processed_data, function (error, result) {
     if (error) {
       console.log('ERROR while updating trades table');
       return callback(error, null);
     } else {
+      // Checks if instrument_id of this trade exists in position table
       validateInstrumentId(processed_data.instrument_id, function (error, result) {
         if (error) {
           console.log('ERROR while checking position table');
           return callback(error, null);
         } else if (result && result.length === 0) {
+          // If not found - runs insert query
           console.log('Could not find ' + processed_data.instrument_id + ' in position table, will insert new row');
           query_string = 'INSERT INTO position SET ?';
           position_data_map.position = calculatePosition(0, processed_data.trade_volume, processed_data.trade_type);
@@ -48,6 +51,7 @@ function updatePosition(data, callback) {
             }
           });
         } else {
+          // If found - runs update query adjusting the previous position
           console.log('Found ' + processed_data.instrument_id + ' in position table, will update row');
           position_data_map.position = calculatePosition(result[0].position, processed_data.trade_volume, processed_data.trade_type);
           query_string = 'UPDATE position SET position = ? WHERE instrument_id = ?';
@@ -66,6 +70,7 @@ function updatePosition(data, callback) {
   });
 }
 
+// Calcutates position - Just adds & subtracts two numbers
 function calculatePosition(curr_position, trade_volume, trade_type) {
   var final_position =
     (Number(trade_type) === 2) ?
@@ -75,6 +80,7 @@ function calculatePosition(curr_position, trade_volume, trade_type) {
   return final_position;
 }
 
+// Updates trades table with relevant trade data extracted from the input string
 function updateTrades(processed_data, callback) {
   var query_string = 'INSERT INTO trades SET ?';
   var trade_data_map = {
@@ -94,6 +100,7 @@ function updateTrades(processed_data, callback) {
   });
 }
 
+// Checks if a given instrument id is present in position table
 function validateInstrumentId(instrument_id, callback) {
   var query_string = 'SELECT instrument_id,position FROM position WHERE instrument_id=' + instrument_id;
   connection.query(query_string, function (error, result) {
@@ -107,6 +114,7 @@ function validateInstrumentId(instrument_id, callback) {
   });
 }
 
+// Fetches position of only the given instrument id
 function fetchPosition(request_data, callback) {
   console.log('GET url: ' + request_data.originalUrl);
   var instrument_id = request_data.originalUrl.split('/')[2];
@@ -120,6 +128,7 @@ function fetchPosition(request_data, callback) {
   });
 }
 
+// Fetches all records from position table
 function fetchAllPositions(request_data, callback) {
   console.log('GET url: ' + request_data.originalUrl);
   var query_string = 'SELECT instrument_id,position FROM position';
@@ -132,6 +141,7 @@ function fetchAllPositions(request_data, callback) {
   });
 }
 
+// Converts the pipe-delimited trade data string and extracts relevant data
 function parseInput(data_string) {
   var split_array = data_string.split('|');
   var processed_data = {};

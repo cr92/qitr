@@ -64,6 +64,10 @@ app.get('/instrument/*', function (request, response) {
   });
 });
 
+app.get('*', function (request, response) {
+  response.sendFile(__dirname + '/public/404.html');
+});
+
 var server = app.listen(9090, function () {
   var port = server.address().port;
   console.log("listening at localhost:%s", port);
