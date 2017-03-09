@@ -36,6 +36,8 @@ app_x.controller('index_show_submit', function ($scope, $http) {
     }, function Error(response) {
       console.log(response);
       // incase user enters invalid/non-existent instrument-id
+      // window.location.href = '/404';
+      $scope.custom_data = {};
       $scope.custom_data.instrument_id = 'Not Available';
       $scope.custom_data.position = 'Not Available';
     });
