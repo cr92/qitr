@@ -57,11 +57,16 @@ app.get('/instrument/*', function (request, response) {
       response.setHeader('Content-Type', 'application/json');
       response.send(JSON.stringify(data));
     } else {
+      response.sendFile(__dirname + '/public/404.html');
       response.status(404).send({
         message: '404 - Not Found'
       });
     }
   });
+});
+
+app.get('*', function (request, response) {
+  response.sendFile(__dirname + '/public/404.html');
 });
 
 var server = app.listen(9090, function () {

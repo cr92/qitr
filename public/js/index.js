@@ -1,38 +1,43 @@
+// controller for the position table
+// fires GET request to /showAll
 var app = angular.module('index_show_all_positions', []);
 app.controller('index_all_positions', function ($scope, $http) {
   $scope.requestData = function () {
     $http({
       method: 'GET',
       url: 'showAll'
-    }).then(function Succes(response) {
+    }).then(function Success(response) {
       console.log(response);
       $scope.positions = response.data;
     }, function Error(response) {
       console.log(response);
-      $scope.all_data = response.statusText;
     });
   };
 
   $scope.requestData();
+  // refresh every 10 seconds
   setInterval($scope.requestData, 10000);
 });
 
 
+// controller for the search result panel
+// fires GET request to /instrument/xxxxx
 var app_x = angular.module('index_show_search', []);
 app_x.controller('index_show_submit', function ($scope, $http) {
   $scope.findPosition = function () {
     $http({
       method: 'GET',
       url: 'instrument/' + $scope.input_instrument_id
-    }).then(function Succes(response) {
+    }).then(function Success(response) {
       console.log(response);
+      // clears the input box if instrument id is found, else not
       $scope.input_instrument_id = '';
       $scope.custom_data = response.data[0];
     }, function Error(response) {
       console.log(response);
+      // incase user enters invalid/non-existent instrument-id
       $scope.custom_data.instrument_id = 'Not Available';
       $scope.custom_data.position = 'Not Available';
-      $scope.all_data = response.statusText;
     });
   };
 });
