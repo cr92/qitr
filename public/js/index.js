@@ -45,3 +45,14 @@ app_x.controller('index_show_submit', function ($scope, $http) {
 });
 
 angular.bootstrap(document.getElementById("show_all"), ['index_show_all_positions']);
+
+var socket = io.connect('http://localhost:9090');
+
+socket.on('connect', function () {
+  var x_id = Math.ceil(Math.random() * 1000000);
+  socket.send('New User Connected. Id: ' + x_id);
+});
+
+socket.on('message', function (push_msg) {
+  console.log(push_msg);
+})
