@@ -80,7 +80,9 @@ var io = socketio.listen(server);
 
 // Logs in server console, when a client connects
 io.sockets.on('connection', function (socket) {
-  console.log('New Client connected');
+  socket.on('message', function (message) {
+    console.log(message)
+  });
 });
 
 // Sends a message every 5 seconds to connected clients
