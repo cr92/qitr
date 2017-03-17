@@ -1,14 +1,19 @@
 var express = require('express');
 var http = require("http");
 var path = require("path");
+var socketio = require("socket.io");
+var ws = require("ws");
 var bodyParser = require("body-parser");
 var apis = require('./apis/apis');
 var app = express();
+
 app.use(express.static(__dirname));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false
 }));
+
+var server = http.createServer(app);
 
 app.get('/', function (request, response) {
   response.sendFile(__dirname + '/public/index.html');
@@ -68,7 +73,25 @@ app.get('*', function (request, response) {
   response.sendFile(__dirname + '/public/404.html');
 });
 
-var server = app.listen(9090, function () {
-  var port = server.address().port;
-  console.log("listening at localhost:%s", port);
+
+
+// Experimenting with sockets
+var io = socketio.listen(server);
+
+// Logs in server console, when a client connects
+io.sockets.on('connection', function (socket) {
+  console.log('New Client connected');
+});
+
+// Sends a message every 5 seconds to connected clients
+setInterval(function () {
+  io.sockets.emit('message', {
+    message: "Hello Yu..."
+  });
+}, 5000);
+
+
+
+server.listen('9090', function () {
+  console.log('on port 9090: ');
 });

@@ -45,3 +45,8 @@ app_x.controller('index_show_submit', function ($scope, $http) {
 });
 
 angular.bootstrap(document.getElementById("show_all"), ['index_show_all_positions']);
+
+var socket = io.connect('http://localhost:9090');
+socket.on('message', function (push_msg) {
+  console.log(push_msg);
+})
